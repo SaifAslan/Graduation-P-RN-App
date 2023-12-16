@@ -108,9 +108,12 @@ export default function Profile() {
         source={require('../assets/images/istockphoto-1300512215-612x612.jpg')}
       />
       <Text style={styles.name}>{userInfo.name + ' ' + userInfo.surname}</Text>
-      <Accordion style={{width:"100%"}} onChange={onChange} activeSections={state.activeSections}>
-        <Accordion.Panel  header="My Orders">
-          <ScrollView  style={styles.scrollableView}>
+      <Accordion
+        style={{width: '100%'}}
+        onChange={onChange}
+        activeSections={state.activeSections}>
+        <Accordion.Panel header="My Orders">
+          <ScrollView style={styles.scrollableView}>
             <List>
               {orders.map((order, index) => {
                 return (
@@ -163,12 +166,16 @@ export default function Profile() {
         </Accordion.Panel>
       </Accordion>
       <AppButton
-        PressableStyle={{}}
-        ViewStyle={{}}
+        PressableStyle={styles.button}
+        ViewStyle={styles.buttonView}
         onPress={() => {
           dispatch(logout());
         }}
-        Content={<Text>Log out</Text>}
+        Content={
+          <Text style={{color: 'white', fontWeight: '600', fontSize: 18}}>
+            Sign out
+          </Text>
+        }
       />
       <Modal
         key={1}
@@ -231,7 +238,7 @@ const styles = StyleSheet.create({
   },
   scrollableView: {
     maxHeight: 300,
-    width:'100%',
+    width: '100%',
   },
   centeredView: {
     flex: 1,
@@ -255,5 +262,18 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     maxHeight: '80%',
+  },
+  button: {
+    height: 75,
+    backgroundColor: '#2F2F2F',
+    // flex: 3,
+    width: '100%',
+  },
+  buttonView: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

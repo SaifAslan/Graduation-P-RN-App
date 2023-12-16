@@ -8,6 +8,6 @@ export interface IOrder extends ICart {
   address: IAddress;
   totalPrice: number;
   orderStatus: 'Pending' | 'Processing' | 'Shipped' | 'Cancelled' | 'Delivered';
-  orderDate: Date;
+  orderDate: string;
   coupon?: ObjectId;
 }

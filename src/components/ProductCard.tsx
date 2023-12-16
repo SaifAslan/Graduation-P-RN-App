@@ -6,6 +6,14 @@ import axios from 'axios';
 import {mainServiceURL} from '../utils/constants';
 import {updateFavorites, deleteProduct} from '../redux/feature/favouriteSlice';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  Login: undefined;
+};
+
+type ProfileProps = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 export default function ProductCard(props: {product: IProduct}): JSX.Element {
   const {brand_name, details, sell_price, mrp, discount, imageUri} =
@@ -13,7 +21,7 @@ export default function ProductCard(props: {product: IProduct}): JSX.Element {
   const favourite = useAppSelector(state => state.favourite)?.products;
   const userInfo = useAppSelector(state => state.userInfo);
   const [inFavourites, setInFavourites] = useState<boolean>(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<ProfileProps>();
   const dispatch = useAppDispatch();
 
   useEffect(() => {

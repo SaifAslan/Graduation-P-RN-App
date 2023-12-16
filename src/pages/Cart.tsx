@@ -46,7 +46,7 @@ export default function Cart() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{alignItems: 'center'}}
         renderItem={itemData => {
-          return <ProductCardCart item={itemData.item} />;
+          return <ProductCardCart cartPage={true} item={itemData.item} />;
         }}
         // keyExtractor={(item) => item._id}
       />

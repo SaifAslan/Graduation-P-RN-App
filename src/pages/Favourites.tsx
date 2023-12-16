@@ -5,7 +5,6 @@ import {IProduct} from '../interfaces/product';
 import {useAppSelector} from '../redux/hooks';
 import {useNavigation} from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import Spacer from '../components/Spacer';
 
 
 
@@ -21,7 +20,7 @@ export default function Favorites() {
   const navigation = useNavigation<ProfileProps>();
   return (
     <View style={styles.container}>
-      <View style={{ overflow: 'hidden'}}>
+      <View style={{marginBottom: 90, overflow: 'hidden'}}>
         <FlatList
           getItemLayout={(data, index) => ({
             length: favorites.products?.length,
@@ -46,8 +45,8 @@ export default function Favorites() {
               </Pressable>
             );
           }}
+          // keyExtractor={(item) => item._id}
         />
-       <Spacer />
       </View>
     </View>
   );
@@ -56,11 +55,14 @@ export default function Favorites() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
     width: '100%',
   },
   productsContainer: {
     width: '100%',
     backgroundColor: '#D9D9D9',
+    // height: 'auto',
   },
 });
 

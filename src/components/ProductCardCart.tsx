@@ -11,12 +11,12 @@ interface IProps {
     size: string;
     quantity: number;
   };
+  cartPage: boolean;
 }
 
 export default function ProductCardCart(props: IProps) {
   const {product, size, quantity} = props.item;
   const dispatch = useAppDispatch();
-
   const counter = (
     <View style={styles.counter}>
       <AppButton
@@ -34,15 +34,18 @@ export default function ProductCardCart(props: IProps) {
         ViewStyle={styles.btnView}
       />
       <Text style={styles.counterText}>{quantity}</Text>
+
       <AppButton
         Content={<Text style={styles.counterText}>-</Text>}
-        onPress={() => { dispatch(
+        onPress={() => {
+          dispatch(
             updateQuantity({
               productId: product.id,
               quantity: quantity - 1,
               size: size,
             }),
-          );}}
+          );
+        }}
         PressableStyle={styles.btnPressable}
         ViewStyle={styles.btnView}
       />
@@ -77,7 +80,7 @@ export default function ProductCardCart(props: IProps) {
             </Text>
           </View>
         </View>
-        {counter}
+        {props.cartPage && counter}
       </View>
       {product.discount != '0% off' && (
         <View style={styles.discountContainer}>

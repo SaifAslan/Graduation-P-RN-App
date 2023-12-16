@@ -20,6 +20,7 @@ import Login from './src/pages/Login';
 import Register from './src/pages/Register';
 import { initPaymentSheet, useStripe } from '@stripe/stripe-react-native';
 import Success from './src/pages/Success';
+import Order from './src/pages/Order';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -84,6 +85,8 @@ function App(): JSX.Element {
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="Success" component={Success} />
+            <Stack.Screen name="Order" component={Order} />
+
           </Stack.Navigator>
           <StickyFooter />
         </NavigationContainer>
