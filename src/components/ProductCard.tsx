@@ -9,11 +9,11 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type RootStackParamList = {
-  Home: undefined;
+  Index: undefined;
   Login: undefined;
 };
 
-type ProfileProps = NativeStackNavigationProp<RootStackParamList, 'Home'>;
+type ProfileProps = NativeStackNavigationProp<RootStackParamList, 'Index'>;
 
 export default function ProductCard(props: {product: IProduct}): JSX.Element {
   const {brand_name, details, sell_price, mrp, discount, imageUri} =
@@ -107,7 +107,7 @@ export default function ProductCard(props: {product: IProduct}): JSX.Element {
             justifyContent: discount == '0% off' ? 'flex-end' : 'space-between',
           }}>
           {discount != '0% off' && (
-            <Text style={ProductStyles.mrp}>{mrp.replace('\n', ' ')}</Text>
+            <Text style={ProductStyles.mrp}>{mrp?.replace('\n', ' ')}</Text>
           )}
           <Text
             style={{
@@ -149,15 +149,20 @@ export default function ProductCard(props: {product: IProduct}): JSX.Element {
 
 const ProductStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     margin: 1,
-    width: 200,
+    width: 170,
     backgroundColor: 'white',
-    height: 300,
+    height: 250,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
+    shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    marginBottom: 10,
   },
   imageContainer: {
     // height:200,

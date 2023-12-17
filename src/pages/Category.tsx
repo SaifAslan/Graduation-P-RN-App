@@ -23,17 +23,18 @@ import ProductCard from '../components/ProductCard';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {useDispatch} from 'react-redux';
 import {updateFavorites} from '../redux/feature/favouriteSlice';
+import {ICategory} from '../interfaces/category';
 // import image1 from '../assets/images/21_64202794_1.jpg'
 type SectionProps = PropsWithoutRef<{
-  // title: string;
+  route: {params: {category: ICategory}};
 }>;
 
 type RootStackParamList = {
   Product: {product: IProduct};
-  Home: undefined;
+  Category: undefined;
 };
 
-type ProfileProps = NativeStackNavigationProp<RootStackParamList, 'Home'>;
+type ProfileProps = NativeStackNavigationProp<RootStackParamList, 'Category'>;
 
 const CategoryCard = (props: any): JSX.Element => {
   return (
@@ -54,8 +55,9 @@ const CategoryCard = (props: any): JSX.Element => {
   );
 };
 
-export default function Home({}: SectionProps): JSX.Element {
+export default function Category({route}: SectionProps): JSX.Element {
   const [products, setProducts] = useState<IProduct[]>([]);
+  const {category} = route.params;
 
   const userInfo = useAppSelector(state => state.userInfo);
   const dispatch = useAppDispatch();
@@ -63,7 +65,7 @@ export default function Home({}: SectionProps): JSX.Element {
   const favorites = useAppSelector(state => state.favourite);
   const getProducts = (): void => {
     axios
-      .get(mainServiceURL() + '/api/products')
+      .get(mainServiceURL() + '/api/products/category/' + category.title)
       .then(response => {
         setProducts(response.data.products);
       })
@@ -73,8 +75,9 @@ export default function Home({}: SectionProps): JSX.Element {
   };
 
   useEffect(() => {
+    console.log(category.title);
+    
     getProducts();
-    getFavourites();
   }, []);
 
   useEffect(() => {
@@ -100,31 +103,20 @@ export default function Home({}: SectionProps): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <View style={{marginBottom: 255, overflow: 'hidden'}}>
-        <FlatList
-          getItemLayout={(data, index) => ({
-            length: categories.length,
-            offset: 110 * index,
-            index,
-          })}
-          horizontal
-          //@ts-ignore
-          data={categories}
-          style={styles.categoriesContainer}
-          showsHorizontalScrollIndicator={false}
-          renderItem={itemData => {
-            return (
-              <Pressable>
-                <CategoryCard index={itemData.index} category={itemData.item} />
-              </Pressable>
-            );
-          }}
-          // keyExtractor={(item) => item._id}
-        />
+      <View style={{overflow: 'hidden'}}>
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: '600',
+            padding: 20,
+            backgroundColor: 'white',
+          }}>
+          {category.title}
+        </Text>
         <FlatList
           getItemLayout={(data, index) => ({
             length: products.length,
-            offset: 350 * index,
+            offset: 250 * index,
             index,
           })}
           numColumns={2}
@@ -169,8 +161,8 @@ const styles = StyleSheet.create({
   },
   productsContainer: {
     width: '100%',
-    backgroundColor: '#D9D9D9',
-    // height: 'auto',
+    backgroundColor: 'white',
+    height: 'auto',
   },
 });
 

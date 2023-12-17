@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type RootStackParamList = {
-  Home: undefined;
+  Index: undefined;
   Profile: undefined;
   Favourites: undefined;
   Search: undefined;
@@ -24,7 +24,7 @@ export default function StickyFooter() {
       <Pressable onPress={() => handleNavigation('Favourites')}>
         <Image source={require('../assets/images/Star.png')} />
       </Pressable>
-      <Pressable onPress={() => handleNavigation('Home')}>
+      <Pressable onPress={() => handleNavigation('Index')}>
         <Image source={require('../assets/images/Home_duotone.png')} />
       </Pressable>
       <Pressable onPress={() => handleNavigation('Profile')}>

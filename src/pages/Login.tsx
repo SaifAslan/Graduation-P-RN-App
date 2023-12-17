@@ -19,7 +19,7 @@ import {login} from '../redux/feature/userinfoSlice';
 type RootStackParamList = {
   Register: undefined;
   Login: undefined;
-  Home: undefined;
+  Index: undefined;
 };
 
 type ProfileProps = NativeStackNavigationProp<RootStackParamList, 'Login'>;
@@ -55,7 +55,7 @@ export default function Login() {
               _id:response.data.user._id
             }),
           );
-          navigation.navigate('Home');
+          navigation.navigate('Index');
         } else {
           Alert.alert('Error', response.data.message);
         }

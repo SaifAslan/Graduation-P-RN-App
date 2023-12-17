@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type RootStackParamList = {
-  Home: undefined;
+  Index: undefined;
   Success: undefined;
   Profile: undefined;
 };
@@ -14,7 +14,7 @@ type ProfileProps = NativeStackNavigationProp<RootStackParamList, 'Success'>;
 export default function Success() {
   const navigation = useNavigation<ProfileProps>();
   const handleContinueShopping = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Index');
   };
 
   const handleProfile = () => {

@@ -4,17 +4,19 @@ import {persistReducer} from 'redux-persist';
 import cartReducer from './feature/cartSlice';
 import userReducer from './feature/userinfoSlice';
 import favouriteReducer from './feature/favouriteSlice';
+import categoryReducer from './feature/categorySlice';
 
 const reducer = combineReducers({
   cart: cartReducer,
   userInfo: userReducer,
   favourite: favouriteReducer,
+  category: categoryReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['cart', 'userInfo', 'favourite'],
+  whitelist: ['cart', 'userInfo', 'favourite', 'category'],
 };
 
 const persistor = persistReducer(persistConfig, reducer);

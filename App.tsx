@@ -1,14 +1,14 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import React, { useCallback, useEffect } from 'react';
+import React, {useCallback, useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
 import {Linking, StyleSheet} from 'react-native';
 import {Provider} from 'react-redux';
-import { store} from './src/redux/store';
+import {store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
-import home from './src/pages/Home';
+import Category from './src/pages/Category';
 import AppHeader from './src/components/Header';
 import Product from './src/pages/Product';
 import StickyFooter from './src/components/StickyFooter';
@@ -18,20 +18,20 @@ import Profile from './src/pages/Profile';
 import Checkout from './src/pages/Checkout';
 import Login from './src/pages/Login';
 import Register from './src/pages/Register';
-import { initPaymentSheet, useStripe } from '@stripe/stripe-react-native';
+import {initPaymentSheet, useStripe} from '@stripe/stripe-react-native';
 import Success from './src/pages/Success';
 import Order from './src/pages/Order';
+import Index from './src/pages/Index';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-
 function App(): JSX.Element {
   const Stack = createNativeStackNavigator();
   let persistor = persistStore(store);
 
-  const { handleURLCallback } = useStripe();
+  const {handleURLCallback} = useStripe();
 
   const handleDeepLink = useCallback(
     async (url: string | null) => {
@@ -44,7 +44,7 @@ function App(): JSX.Element {
         }
       }
     },
-    [handleURLCallback]
+    [handleURLCallback],
   );
 
   useEffect(() => {
@@ -57,9 +57,9 @@ function App(): JSX.Element {
 
     const deepLinkListener = Linking.addEventListener(
       'url',
-      (event: { url: string }) => {
+      (event: {url: string}) => {
         handleDeepLink(event.url);
-      }
+      },
     );
 
     return () => deepLinkListener.remove();
@@ -72,11 +72,12 @@ function App(): JSX.Element {
         <NavigationContainer>
           <AppHeader />
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Index"
             screenOptions={{
               headerShown: false,
             }}>
-            <Stack.Screen name="Home" component={home} />
+            <Stack.Screen name="Index" component={Index} />
+            <Stack.Screen name="Category" component={Category} />
             <Stack.Screen name="Product" component={Product} />
             <Stack.Screen name="Cart" component={Cart} />
             <Stack.Screen name="Favourites" component={Favourites} />
@@ -86,7 +87,6 @@ function App(): JSX.Element {
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="Success" component={Success} />
             <Stack.Screen name="Order" component={Order} />
-
           </Stack.Navigator>
           <StickyFooter />
         </NavigationContainer>
